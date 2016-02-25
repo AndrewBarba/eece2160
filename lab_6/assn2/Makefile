@@ -1,5 +1,4 @@
 
-
 main: main.o GPIO.o
 	g++ main.o GPIO.o -o main
 

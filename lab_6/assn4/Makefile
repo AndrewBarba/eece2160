@@ -1,5 +1,4 @@
 
-
 ServoSpeed: ServoSpeed.o GPIO.o
 	g++ ServoSpeed.o GPIO.o -o ServoSpeed
 

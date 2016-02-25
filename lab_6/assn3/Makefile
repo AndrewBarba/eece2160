@@ -1,5 +1,4 @@
 
-
 ServoPosition: ServoPosition.o GPIO.o
 	g++ ServoPosition.o GPIO.o -o ServoPosition
 
