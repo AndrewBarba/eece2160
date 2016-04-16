@@ -19,10 +19,11 @@ int main() {
 
   while (!game.isGameOver()) {
 
+    // Read acceleration from wii remote
     struct AccelerationEvent accEvent = wii.readAccelerationEvent();
 
     // Update game
-    game.next(0.0);
+    game.next((float)(accEvent.acc / 50));
 
     // Render the board
     game.render();
