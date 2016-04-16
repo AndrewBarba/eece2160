@@ -4,6 +4,7 @@
 #include <time.h>
 #include <unistd.h>
 #include "Game/Game.h"
+#include "Wiimote/Wiimote.h"
 
 int main() {
 
