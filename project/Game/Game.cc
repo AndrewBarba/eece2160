@@ -23,35 +23,49 @@ int Game::getScore() {
 
 void Game::next(float vx) {
 
+  float w = this->width;
+  float h = this->height;
+  float bx = this->ball->getX();
+  float by = this->ball->getY();
+  float px = this->paddle->getX();
+  float pw = this->paddle->getWidth();
+
   // Move paddle
   this->paddle->move(vx);
 
   // Move ball
   this->ball->move();
 
-  // Check for x collision
-  if (this->ball->getX() < 0 || this->ball->getX() > this->width) {
+  // Check for side collision
+  if (bx <= 0 || bx >= w) {
     this->ball->collideX();
   }
 
-  // Check for y collision
-  if (this->ball->getY() < 0) {
+  // Check for top collision
+  if (by <= 0) {
     this->ball->collideY();
   }
 
   // Check for paddle collision
-  if (this->ball->getY() <= this->height && this->ball->getY() >= this->height - 1.0 && this->ball->getX() >= this->paddle->getX() && this->ball->getX() <= this->paddle->getX() + this->paddle->getWidth()) {
+  if (by == h && bx >= px && bx <= px + pw) {
     this->ball->collideY();
     this->score += 1;
   }
 
   // Check for game over
-  if (this->ball->getY() > this->height) {
+  if (by > h) {
     this->gameOver = true;
   }
 }
 
 void Game::render() {
+
+  // Clear the screen
+  for (int y = 0; y < 100; y++) {
+    std::cout << "\n";
+  }
+
+  // Render board and ball
   for (int y = 0; y < this->height; y++) {
     for (int x = 0; x < this->width; x++) {
       if (this->ball->getX() == x && this->ball->getY() == y) {
@@ -63,6 +77,7 @@ void Game::render() {
     std::cout << "\n";
   }
 
+  // Render paddle under board
   for (int x = 0; x < this->width; x++) {
     if (this->paddle->getX() <= x && this->paddle->getX() + this->paddle->getWidth() >= x) {
       std::cout << "=";
@@ -70,8 +85,6 @@ void Game::render() {
       std::cout << " ";
     }
   }
-
-  std::cout << "\n";
 }
 
 Game::~Game() {
