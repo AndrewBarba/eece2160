@@ -22,8 +22,9 @@ public:
    *
    * @param {int} width - width of board
    * @param {int} height - height of board
+   * @param {int} pwidth - width of the paddle
    */
-  Game(int width, int height);
+  Game(int width, int height, int pwidth);
 
   /**
    * Destructor

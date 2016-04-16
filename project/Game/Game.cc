@@ -5,18 +5,18 @@
 #include "Game.h"
 
 float RandomFloat(float a, float b) {
-  float random = ((float) rand()) / (float) RAND_MAX;
+  float random = ((float)rand()) / (float)RAND_MAX;
   float diff = b - a;
   float r = random * diff;
   return a + r;
 }
 
-Game::Game(int width, int height) {
+Game::Game(int width, int height, int pwidth) {
   this->width = width;
   this->height = height;
   this->score = 0;
   this->gameOver = false;
-  this->paddle = new Paddle(0, width);
+  this->paddle = new Paddle(width / 2, pwidth);
   this->ball = new Ball(
     (int)RandomFloat(1, width - 1),
     1.0,
@@ -52,32 +52,27 @@ void Game::next(float vx) {
   // Check for left collision
   if (bx <= 0 && !leading) {
     this->ball->collideX();
-    return;
   }
 
   // Check for right collision
   if (bx >= w && leading) {
     this->ball->collideX();
-    return;
   }
 
   // Check for top collision
   if (by <= 0 && !falling) {
     this->ball->collideY();
-    return;
   }
 
   // Check for paddle collision
   if (falling && by >= h - 1 && bx >= px && bx <= px + pw) {
     this->ball->collideY();
     this->score += 1;
-    return;
   }
 
   // Check for game over
   if (by > h + 4.0) {
     this->gameOver = true;
-    return;
   }
 }
 
