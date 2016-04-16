@@ -15,6 +15,14 @@ float Ball::getY() {
   return this->y;
 }
 
+bool Ball::isFalling() {
+  return this->vy > 0;
+}
+
+bool Ball::isLeading() {
+  return this->vx > 0;
+}
+
 void Ball::move() {
   this->x += this->vx;
   this->y += this->vy;

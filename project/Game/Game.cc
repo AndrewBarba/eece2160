@@ -9,8 +9,8 @@ Game::Game(int width, int height) {
   this->height = height;
   this->score = 0;
   this->gameOver = false;
-  this->paddle = new Paddle(width / 2, 10.0);
-  this->ball = new Ball(width / 2, 0.0, 1.0, 1.0);
+  this->paddle = new Paddle(0, width);
+  this->ball = new Ball(width / 2, 0.0, 4.0, 1.0);
 }
 
 bool Game::isGameOver() {
@@ -29,6 +29,8 @@ void Game::next(float vx) {
   float by = this->ball->getY();
   float px = this->paddle->getX();
   float pw = this->paddle->getWidth();
+  bool falling = this->ball->isFalling();
+  bool leading = this->ball->isLeading();
 
   // Move paddle
   this->paddle->move(vx);
@@ -36,25 +38,35 @@ void Game::next(float vx) {
   // Move ball
   this->ball->move();
 
-  // Check for side collision
-  if (bx <= 0 || bx >= w) {
+  // Check for left collision
+  if (bx <= 0 && !leading) {
     this->ball->collideX();
+    return;
+  }
+
+  // Check for right collision
+  if (bx >= w && leading) {
+    this->ball->collideX();
+    return;
   }
 
   // Check for top collision
-  if (by <= 0) {
+  if (by <= 0 && !falling) {
     this->ball->collideY();
+    return;
   }
 
   // Check for paddle collision
-  if (by == h && bx >= px && bx <= px + pw) {
+  if (falling && by >= h - 1 && bx >= px && bx <= px + pw) {
     this->ball->collideY();
     this->score += 1;
+    return;
   }
 
   // Check for game over
   if (by > h) {
     this->gameOver = true;
+    return;
   }
 }
 
@@ -70,6 +82,10 @@ void Game::render() {
     for (int x = 0; x < this->width; x++) {
       if (this->ball->getX() == x && this->ball->getY() == y) {
         std::cout << "o";
+      } else if (x == 0 || x == width - 1) {
+        std::cout << "|";
+      } else if (y == 0) {
+        std::cout << "-";
       } else {
         std::cout << " ";
       }
@@ -85,8 +101,11 @@ void Game::render() {
       std::cout << " ";
     }
   }
+
+  // End screen
+  std::cout << "\n";
 }
 
 Game::~Game() {
-  std::cout << "Game Over. Final Score: " << this->score;
+  std::cout << "\n\n" << "GAME OVER" << "\n\n" << "Final Score: " << this->score << "\n\n";
 }

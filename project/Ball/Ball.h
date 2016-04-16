@@ -41,6 +41,20 @@ public:
   float getY();
 
   /**
+   * Is the ball falling towards the paddle
+   *
+   * @return {bool}
+   */
+  bool isFalling();
+
+  /**
+   * Is the ball moving to the right
+   *
+   * @return {bool}
+   */
+  bool isLeading();
+
+  /**
    * Moves the ball 1 tick
    */
   void move();
