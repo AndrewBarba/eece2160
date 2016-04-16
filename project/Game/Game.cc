@@ -1,10 +1,12 @@
+#include <iostream>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <iostream>
+#include <time.h>
 #include "Game.h"
 
 float RandomFloat(float a, float b) {
+  srand(time(NULL));
   float random = ((float)rand()) / (float)RAND_MAX;
   float diff = b - a;
   float r = random * diff;
@@ -18,9 +20,9 @@ Game::Game(int width, int height, int pwidth) {
   this->gameOver = false;
   this->paddle = new Paddle(width / 2, pwidth);
   this->ball = new Ball(
-    (int)RandomFloat(1, width - 1),
+    RandomFloat(1, width - 1),
     1.0,
-    (int)RandomFloat(1.0, 4.0),
+    RandomFloat(1.0, 4.0),
     1.0);
 }
 
@@ -86,7 +88,7 @@ void Game::render() {
   // Render board and ball
   for (int y = 0; y < this->height; y++) {
     for (int x = 0; x < this->width; x++) {
-      if (this->ball->getX() == x && this->ball->getY() == y) {
+      if ((int)this->ball->getX() == x && (int)this->ball->getY() == y) {
         std::cout << "o";
       } else if (x == 0 || x == width - 1) {
         std::cout << "|";
