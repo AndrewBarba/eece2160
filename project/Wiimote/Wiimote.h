@@ -4,15 +4,29 @@ class Wiimote {
 
 	int fd;
 
+	ZedBoard *zb;
+	
 public:
 
-	ZedBoard *zb;
-
+	/**
+   * Public constructor
+	 *
+	 * @param {ZedBoard} zb - reference to a ZedBoard instance
+	 */
 	Wiimote(ZedBoard *zb);
 
+	/**
+   * Destructor
+	 */
+	~Wiimote();
+
+	/**
+   * Start listening for acc events
+	 */
 	void listen();
 
-	virtual void accelerationEvent(int code, short acc);
-
-	~Wiimote();
+	/**
+   * Notify of acc event
+	 */
+	void accelerationEvent(int code, short acc);
 };

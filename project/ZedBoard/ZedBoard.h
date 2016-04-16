@@ -3,8 +3,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
+
 // Physical base address of GPIO
 const unsigned gpio_address = 0x400d0000;
+
 // Length of memory-mapped IO window
 const unsigned gpio_size = 0xff;
 const int gpio_led1_offset = 0x12C; // Offset for LED1
@@ -29,9 +31,6 @@ public:
 
   /**
    * Public constructor
-   *
-   * @param {char} ptr - Base address returned by 'mmap'
-   * @param {int} fd - File descriptor passed by reference, where the result of function 'open' will be stored
    */
   ZedBoard();
 

@@ -3,35 +3,47 @@
 
 class Game {
 
-  // Width of the board
   int width;
 
-  // Height of the board
   int height;
 
-  // Current score
   int score;
 
-  // The paddle controlled by Wiimote
   Paddle *paddle;
 
-  // The ball
   Ball *ball;
 
 public:
 
-  // Constructor
+  /**
+   * Public constructor
+   *
+   * @param {int} width - width of board
+   * @param {int} height - height of board
+   */
   Game(int width, int height);
 
-  // Getter for private score
+  /**
+   * Destructor
+   */
+  ~Game();
+
+  /**
+   * Return current game score
+   *
+   * @return {int}
+   */
   int getScore();
 
-  // Moves the board state one position further in time
-  // Pass in the acceleration of the paddle
+  /**
+   * Return private x position of paddle
+   *
+   * @param {float} vx - update game state. moves the underlying paddle by a given x velocity
+   */
   void next(float vx);
 
-  // Renders the current state of the game to the console
+  /**
+   * Render the board to std out
+   */
   void render();
-
-  ~Game();
 };
