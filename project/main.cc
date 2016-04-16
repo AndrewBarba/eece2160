@@ -33,7 +33,7 @@ int main() {
     // zb.setLedNumber(game.getScore());
 
     // Sleep
-    usleep(0.05 * 1000000);
+    usleep(0.1 * 1000000);
   }
 
   return 0;

@@ -4,13 +4,24 @@
 #include <iostream>
 #include "Game.h"
 
+float RandomFloat(float a, float b) {
+  float random = ((float) rand()) / (float) RAND_MAX;
+  float diff = b - a;
+  float r = random * diff;
+  return a + r;
+}
+
 Game::Game(int width, int height) {
   this->width = width;
   this->height = height;
   this->score = 0;
   this->gameOver = false;
   this->paddle = new Paddle(0, width);
-  this->ball = new Ball(width / 2, 0.0, 4.0, 1.0);
+  this->ball = new Ball(
+    (int)RandomFloat(1, width - 1),
+    1.0,
+    (int)RandomFloat(1.0, 4.0),
+    1.0);
 }
 
 bool Game::isGameOver() {
@@ -64,7 +75,7 @@ void Game::next(float vx) {
   }
 
   // Check for game over
-  if (by > h) {
+  if (by > h + 4.0) {
     this->gameOver = true;
     return;
   }
