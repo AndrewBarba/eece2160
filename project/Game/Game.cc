@@ -8,8 +8,8 @@ Game::Game(int width, int height) {
   this->width = width;
   this->height = height;
   this->score = 0;
-  this->paddle = new Paddle(0, width);
-  this->ball = new Ball(width / 2, 0.0, 4.0, 4.0);
+  this->paddle = new Paddle(width / 2, 10.0);
+  this->ball = new Ball(width / 2, 0.0, 1.0, 1.0);
 }
 
 int Game::getScore() {
@@ -35,14 +35,33 @@ void Game::next(float vx) {
   }
 
   // Check for paddle collision
-  if (this->ball->getY() <= this->height && this->ball->getY() >= this->height - 2.0 && this->ball->getX() >= this->paddle->getX() && this->ball->getX() <= this->paddle->getX() + this->paddle->getWidth()) {
+  if (this->ball->getY() <= this->height && this->ball->getY() >= this->height - 1.0 && this->ball->getX() >= this->paddle->getX() && this->ball->getX() <= this->paddle->getX() + this->paddle->getWidth()) {
     this->ball->collideY();
     this->score += 1;
   }
 }
 
 void Game::render() {
-  std::cout << "render... " << this->score << "\n";
+  for (int y = 0; y < this->height; y++) {
+    for (int x = 0; x < this->width; x++) {
+      if (this->ball->getX() == x && this->ball->getY() == y) {
+        std::cout << "o";
+      } else {
+        std::cout << " ";
+      }
+    }
+    std::cout << "\n";
+  }
+
+  for (int x = 0; x < this->width; x++) {
+    if (this->paddle->getX() <= x && this->paddle->getX() + this->paddle->getWidth() >= x) {
+      std::cout << "=";
+    } else {
+      std::cout << " ";
+    }
+  }
+
+  std::cout << "\n";
 }
 
 Game::~Game() {

@@ -8,12 +8,12 @@
 int main() {
 
   // Instantiate Game statically
-  Game game(80, 80);
+  Game game(160, 40);
 
   while (1) {
     game.next(0.0);
     game.render();
-    usleep(0.2 * 1000000);
+    usleep(0.05 * 1000000);
   }
 
   return 0;
