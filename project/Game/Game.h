@@ -28,7 +28,7 @@ public:
 
   // Moves the board state one position further in time
   // Pass in the acceleration of the paddle
-  void next(float acc);
+  void next(float vx);
 
   // Renders the current state of the game to the console
   void render();
