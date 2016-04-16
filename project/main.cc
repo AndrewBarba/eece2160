@@ -17,7 +17,9 @@ int main() {
   // Instantiate Game statically
   Game game(160, 40);
 
-  while (1) {
+  while (!game.isGameOver()) {
+
+    struct AccelerationEvent accEvent = wii.readAccelerationEvent();
 
     // Update game
     game.next(0.0);

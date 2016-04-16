@@ -13,22 +13,19 @@ Wiimote::Wiimote(ZedBoard *zb) {
   }
 }
 
-void Wiimote::listen() {
-	while (true) {
+AccelerationEvent Wiimote::readAccelerationEvent() {
 
-    // Read a packet of 32 bytes from Wiimote
-    char buffer[32];
-    read(fd, buffer, 32);
+	struct AccelerationEvent accEvent;
 
-    // Extract code (byte 10) and value (byte 12) from packet
-    int code = buffer[10];
-    short acc = * (short *) (buffer + 12);
-    this->accelerationEvent(code, acc);
-  }
-}
+	// Read a packet of 32 bytes from Wiimote
+	char buffer[32];
+	read(fd, buffer, 32);
 
-void Wiimote::accelerationEvent(int code, short acc) {
-	std::cout << "Code = " << code << ", acceleration = " << acc << '\n';
+	// Extract code (byte 10) and value (byte 12) from packet
+	accEvent.code = buffer[10];
+	accEvent.acc = * (short *) (buffer + 12);
+
+	return accEvent;
 }
 
 Wiimote::~Wiimote() {

@@ -9,6 +9,8 @@ class Game {
 
   int score;
 
+  bool gameOver;
+
   Paddle *paddle;
 
   Ball *ball;
@@ -27,6 +29,11 @@ public:
    * Destructor
    */
   ~Game();
+
+  /**
+   * Is the game over?
+   */
+  bool isGameOver();
 
   /**
    * Return current game score

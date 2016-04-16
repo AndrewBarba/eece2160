@@ -8,8 +8,13 @@ Game::Game(int width, int height) {
   this->width = width;
   this->height = height;
   this->score = 0;
+  this->gameOver = false;
   this->paddle = new Paddle(width / 2, 10.0);
   this->ball = new Ball(width / 2, 0.0, 1.0, 1.0);
+}
+
+bool Game::isGameOver() {
+  return this->gameOver;
 }
 
 int Game::getScore() {
@@ -38,6 +43,11 @@ void Game::next(float vx) {
   if (this->ball->getY() <= this->height && this->ball->getY() >= this->height - 1.0 && this->ball->getX() >= this->paddle->getX() && this->ball->getX() <= this->paddle->getX() + this->paddle->getWidth()) {
     this->ball->collideY();
     this->score += 1;
+  }
+
+  // Check for game over
+  if (this->ball->getY() > this->height) {
+    this->gameOver = true;
   }
 }
 

@@ -1,11 +1,16 @@
 #include "../ZedBoard/ZedBoard.h"
 
+struct AccelerationEvent {
+	int code;
+	short acc;
+};
+
 class Wiimote {
 
 	int fd;
 
 	ZedBoard *zb;
-	
+
 public:
 
 	/**
@@ -21,12 +26,7 @@ public:
 	~Wiimote();
 
 	/**
-   * Start listening for acc events
+   * Read an event from accelerometer
 	 */
-	void listen();
-
-	/**
-   * Notify of acc event
-	 */
-	void accelerationEvent(int code, short acc);
+	AccelerationEvent readAccelerationEvent();
 };
