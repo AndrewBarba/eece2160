@@ -25,7 +25,7 @@ int main() {
       position += accEvent.acc;
     }
 
-    // Update game
+    // Update game and render screen
     game.next(position / 4.0)->render();
 
     // Write score to ZedBoard
