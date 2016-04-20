@@ -4,8 +4,7 @@
 #include <iostream>
 #include "Wiimote.h"
 
-Wiimote::Wiimote(ZedBoard *zb) {
-	this->zb = zb;
+Wiimote::Wiimote() {
 	this->fd = open("/dev/input/event0", O_RDONLY);
   if (this->fd == -1) {
     std::cerr << "Error: Could not open event file - forgot sudo?\n";

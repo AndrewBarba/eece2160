@@ -9,16 +9,12 @@ class Wiimote {
 
 	int fd;
 
-	ZedBoard *zb;
-
 public:
 
 	/**
    * Public constructor
-	 *
-	 * @param {ZedBoard} zb - reference to a ZedBoard instance
 	 */
-	Wiimote(ZedBoard *zb);
+	Wiimote();
 
 	/**
    * Destructor
