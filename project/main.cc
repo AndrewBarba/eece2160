@@ -1,8 +1,3 @@
-#include <stdlib.h>
-#include <iostream>
-#include <ctime>
-#include <time.h>
-#include <unistd.h>
 #include "Game/Game.h"
 #include "Wiimote/Wiimote.h"
 

@@ -1,6 +1,3 @@
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
 #include <iostream>
 #include "Wiimote.h"
 

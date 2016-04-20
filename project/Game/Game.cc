@@ -1,8 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <time.h>
 #include "Game.h"
 
 float RandomFloat(float a, float b) {
