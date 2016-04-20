@@ -6,32 +6,56 @@
 #include "Game/Game.h"
 #include "Wiimote/Wiimote.h"
 
-int main() {
+// Instantiate ZedBoard statically
+ZedBoard zb;
 
-  // Instantiate ZedBoard statically
-  ZedBoard zb;
+// Instantiate Wiimote statically
+Wiimote wii;
 
-  // Instantiate Wiimote statically
-  Wiimote wii;
+// Instantiate Game statically
+Game game(160, 40, 10);
 
-  // Instantiate Game statically
-  Game game(160, 40, 10);
+// Keep track of remote position
+float position = 0.0;
 
-  // Keep track of remote position
-  float position = 0.0;
+/**
+ * Listens for Wii button presses on a background thread
+ */
+void * listen(void * arg) {
 
-  while (!game.isGameOver()) {
+  while (1) {
 
     // Read acceleration from wii remote
     struct AccelerationEvent accEvent = wii.readAccelerationEvent();
 
-    // Update position
-    if (accEvent.code == 3) {
-      position += accEvent.acc;
+    // Update our position variable
+    switch (accEvent.code) {
+    case 105:
+      position = accEvent.acc == 1 ? -5.0 : 0.0;
+      break;
+    case 106:
+      position = accEvent.acc == 1 ? 5.0 : 0.0;
+      break;
     }
+  }
+
+  return 0;
+}
+
+/**
+ * Main function
+ */
+int main() {
+
+  // Create a background thread to listen for button events
+  pthread_t t1;
+  pthread_create(&t1, NULL, listen, NULL);
+
+  // Enter main run loop
+  while (!game.isGameOver()) {
 
     // Update game and render screen
-    game.next(position / 4.0)->render();
+    game.next(position)->render();
 
     // Write score to ZedBoard
     zb.setLedNumber(game.getScore());
