@@ -26,10 +26,7 @@ int main() {
     }
 
     // Update game
-    game.next(position / 4.0);
-
-    // Render the board
-    game.render();
+    game.next(position / 4.0)->render();
 
     // Write score to ZedBoard
     zb.setLedNumber(game.getScore());

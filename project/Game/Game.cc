@@ -30,7 +30,7 @@ int Game::getScore() {
   return this->score;
 }
 
-void Game::next(float vx) {
+Game* Game::next(float vx) {
 
   float w = this->width;
   float h = this->height;
@@ -72,9 +72,11 @@ void Game::next(float vx) {
   if (by > h + 4.0) {
     this->gameOver = true;
   }
+
+  return this;
 }
 
-void Game::render() {
+Game* Game::render() {
 
   // Clear the screen
   for (int y = 0; y < 100; y++) {
@@ -108,6 +110,8 @@ void Game::render() {
 
   // End screen
   std::cout << "\n";
+
+  return this;
 }
 
 Game::~Game() {

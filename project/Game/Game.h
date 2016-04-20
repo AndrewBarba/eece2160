@@ -47,11 +47,13 @@ public:
    * Return private x position of paddle
    *
    * @param {float} vx - update game state. moves the underlying paddle by a given x velocity
+   * @return {Game} return the game for easy chaining
    */
-  void next(float vx);
+  Game* next(float vx);
 
   /**
    * Render the board to std out
+   * @return {Game} return the game for easy chaining
    */
-  void render();
+  Game* render();
 };
