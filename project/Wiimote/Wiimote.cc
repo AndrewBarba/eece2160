@@ -1,4 +1,8 @@
+#include <stdlib.h>
 #include <iostream>
+#include <ctime>
+#include <time.h>
+#include <unistd.h>
 #include "Wiimote.h"
 
 Wiimote::Wiimote() {
