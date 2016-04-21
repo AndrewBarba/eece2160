@@ -51,4 +51,4 @@ Hardik was responsible for the Wii remote connection setup and scripts so we cou
 
 ## YouTube Link
 
-[https://youtu.be/O8p-385OEZ4](https://youtu.be/O8p-385OEZ4)
+[https://www.youtube.com/watch?v=O8p-385OEZ4](https://www.youtube.com/watch?v=O8p-385OEZ4)
