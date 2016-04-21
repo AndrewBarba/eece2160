@@ -18,13 +18,15 @@ To summarize the main features of the game:
 3. Full collision detection
 4. Realtime scoring using the LED's on the ZedBoard
 
-In the code we heavily used Classes, Structs, file descriptors and writing to standard out. All of the code is organized into folders that separate the functionality of each component. This makes the code easy to read and even easier to navigate. All header files are fully documented so a new reader can easily learn how the components fit together without digging into implementation. Finally, a single Makefile is responsible for compiling the code into a `main` executable.
+In the code we heavily used Classes, Structs, Threads, file descriptors and writing to standard out. All of the code is organized into folders that separate the functionality of each component. This makes the code easy to read and even easier to navigate. All header files are fully documented so a new reader can easily learn how the components fit together without digging into implementation. Finally, a single Makefile is responsible for compiling the code into a `main` executable.
 
-In order to expose our game to the end user we ended up building a single `render` function in the `Game` class that handled redrawing the state of the game on each *tick*. A *tick* in this case is just one iteration of the main run loop. In the run loop we did 3 main things:
+In order to expose our game to the end user we ended up building a single `render` function in the `Game` class that handled redrawing the state of the game on each *tick*. A *tick* in this case is just one iteration of the main run loop. In the *main* run loop we did 3 main things:
 
-1. Read in an acceleration event from the Wii remote
-2. Update the state of the game
-3. Render the game
+1. Update the state of the game
+2. Render the game
+3. Sleep for a fraction of a second
+
+In another background thread is where we instantiated the Wii class and listened for button events. This allowed us to render the game independtly of the blocking call to listen for events from the remote.
 
 The run loop would continue infinitely as long as the game is considered *not over*. We had a simple definition for *game over* which was just based on whether the ball had gone below the paddle in which case the user essentially missed the ball and lost. At this point the users final score would be printed to the console and to the LED's on the ZedBoard.
 
@@ -49,4 +51,4 @@ Hardik was responsible for the Wii remote connection setup and scripts so we cou
 
 ## YouTube Link
 
-[https://www.youtube.com/watch?v=xxx](https://www.youtube.com/watch?v=xxx)
+[https://youtu.be/O8p-385OEZ4](https://youtu.be/O8p-385OEZ4)
