@@ -36,6 +36,8 @@ void * listen(void * arg) {
     }
   }
 
+  delete wii;
+
   return 0;
 }
 
@@ -65,6 +67,10 @@ int main() {
     // Sleep
     usleep(0.1 * 1000000);
   }
+
+  delete zb;
+
+  delete game;
 
   return 0;
 }

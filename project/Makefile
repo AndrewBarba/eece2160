@@ -1,10 +1,10 @@
 
 
 main: main.o Game.o Ball.o Paddle.o ZedBoard.o Wiimote.o
-	g++ main.o Game.o Ball.o Paddle.o ZedBoard.o Wiimote.o -o main
+	g++ main.o Game.o Ball.o Paddle.o ZedBoard.o Wiimote.o -o main -pthread
 
 main.o: main.cc Game/Game.h Wiimote/Wiimote.h
-	g++ -c main.cc
+	g++ -c main.cc -pthread
 
 Game.o: Game/Game.cc Game/Game.h Ball/Ball.h Paddle/Paddle.h
 	g++ -c Game/Game.cc
