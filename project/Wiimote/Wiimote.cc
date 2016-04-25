@@ -13,17 +13,17 @@ Wiimote::Wiimote() {
   }
 }
 
-AccelerationEvent Wiimote::readAccelerationEvent() {
+AccelerationEvent* Wiimote::readAccelerationEvent() {
 
-	struct AccelerationEvent accEvent;
+	struct AccelerationEvent *accEvent =  new AccelerationEvent();
 
 	// Read a packet of 32 bytes from Wiimote
 	char buffer[32];
 	read(fd, buffer, 32);
 
 	// Extract code (byte 10) and value (byte 12) from packet
-	accEvent.code = buffer[10];
-	accEvent.acc = * (short *) (buffer + 12);
+	accEvent->code = buffer[10];
+	accEvent->acc = * (short *) (buffer + 12);
 
 	return accEvent;
 }

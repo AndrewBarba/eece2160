@@ -23,17 +23,20 @@ void * listen(void * arg) {
   while (1) {
 
     // Read acceleration from wii remote
-    struct AccelerationEvent accEvent = wii->readAccelerationEvent();
+    struct AccelerationEvent *accEvent = wii->readAccelerationEvent();
 
     // Update our position variable
-    switch (accEvent.code) {
+    switch (accEvent->code) {
     case 105:
-      position = accEvent.acc == 1 ? -5.0 : 0.0;
+      position = accEvent->acc == 1 ? -5.0 : 0.0;
       break;
     case 106:
-      position = accEvent.acc == 1 ? 5.0 : 0.0;
+      position = accEvent->acc == 1 ? 5.0 : 0.0;
       break;
     }
+
+    // Free memory
+    delete accEvent;
   }
 
   delete wii;

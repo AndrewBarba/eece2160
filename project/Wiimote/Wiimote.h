@@ -24,5 +24,5 @@ public:
 	/**
    * Read an event from accelerometer
 	 */
-	AccelerationEvent readAccelerationEvent();
+	AccelerationEvent* readAccelerationEvent();
 };
